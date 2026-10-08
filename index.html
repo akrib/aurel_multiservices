@@ -247,16 +247,26 @@ a{color:inherit}
   padding:.28em 0;
 }
 
-/* ---------- Nous trouver ---------- */
-.find{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);
-  gap:clamp(28px,4vw,52px);
-  margin-top:clamp(30px,4vw,44px);
-  text-align:left;
-  align-items:stretch;
+/* ---------- Nous trouver : une carte de visite ---------- */
+.card{
+  position:relative;
+  max-width:620px;
+  margin:clamp(30px,4vw,44px) auto 0;
+  padding:clamp(34px,5vw,48px) clamp(22px,5vw,56px) clamp(32px,4.5vw,44px);
+  font-style:normal;
+  text-align:center;
+  background:rgba(247,240,225,.42);
+  border:1px solid var(--sepia);
+  outline:1px solid var(--sepia);
+  outline-offset:-7px;
+  box-shadow:0 1px 0 rgba(255,250,238,.6),0 6px 18px rgba(90,55,30,.12);
 }
-.find address{font-style:normal;align-self:center}
+.card .corner{width:clamp(34px,5vw,46px);color:var(--sepia)}
+.card .corner.tl,.card .corner.tr{top:3px}
+.card .corner.bl,.card .corner.br{bottom:3px}
+.card .corner.tl,.card .corner.bl{left:3px}
+.card .corner.tr,.card .corner.br{right:3px}
+.card .flourish{width:130px;margin:20px auto 14px}
 .addr{
   margin:0;
   font-weight:500;
@@ -265,7 +275,7 @@ a{color:inherit}
   letter-spacing:.04em;
   text-transform:uppercase;
 }
-.n7{display:flex;align-items:center;gap:.7em;margin:.9em 0 0;font-size:1.05rem;letter-spacing:.03em}
+.n7{display:flex;align-items:center;justify-content:center;gap:.7em;margin:.9em 0 0;font-size:1.05rem;letter-spacing:.03em}
 .route{
   display:inline-block;
   padding:.18em .55em .22em;
@@ -279,31 +289,75 @@ a{color:inherit}
   outline-offset:-3px;
   line-height:1.2;
 }
-.contact{list-style:none;margin:1.4em 0 0;padding:1.2em 0 0;border-top:1px solid rgba(140,117,99,.55)}
-.contact li{display:flex;align-items:baseline;gap:.8em;padding:.2em 0}
-.contact .k{flex:none;width:5.2em;font-size:.82rem;letter-spacing:.06em;color:var(--sepia);font-weight:500}
+.contact{list-style:none;margin:0;padding:0}
+.contact li{display:flex;justify-content:center;align-items:baseline;gap:.8em;padding:.2em 0}
+.contact .k{flex:none;font-size:.82rem;letter-spacing:.06em;color:var(--sepia);font-weight:500}
 .contact a{text-decoration:none;font-weight:500;letter-spacing:.03em;overflow-wrap:anywhere}
 .contact a:hover{text-decoration:underline;text-underline-offset:3px}
 .contact .tel{font-size:1.35rem;font-weight:400;letter-spacing:.06em}
-.find .btn{margin-top:1.6em}
-
-.map{
-  position:relative;
-  min-height:300px;
-  border:1px solid var(--sepia);
-  outline:1px solid var(--sepia);
-  outline-offset:4px;
-  margin:5px;
-  background:rgba(140,117,99,.12);
-}
-.map iframe{
-  position:absolute;inset:0;width:100%;height:100%;border:0;
-  filter:sepia(.55) saturate(.75) contrast(.95) brightness(1.02);
-}
+.card .btn{margin-top:1.5em}
 
 /* ---------- Pied ---------- */
 .foot{margin-top:clamp(56px,7vw,84px);text-align:center;font-size:.92rem;letter-spacing:.04em;color:var(--ink-2)}
 .foot p{margin:.8em 0 0}
+
+/* ---------- Mentions légales ---------- */
+.legal{margin-top:22px}
+.legal summary{
+  display:inline-flex;align-items:center;gap:.55em;
+  padding:.35em .2em;
+  cursor:pointer;
+  list-style:none;
+  font-weight:500;
+  font-size:.86rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.legal summary::-webkit-details-marker{display:none}
+.legal summary::before{
+  content:"";
+  width:.45em;height:.45em;
+  border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
+  transform:rotate(-45deg);
+  transition:transform .2s ease;
+}
+.legal[open] summary::before{transform:rotate(45deg) translate(-2px,-2px)}
+.legal summary:hover{text-decoration:underline;text-underline-offset:4px}
+.legal-body{
+  max-width:66ch;
+  margin:22px auto 0;
+  padding-top:8px;
+  text-align:left;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:.95rem;
+  line-height:1.65;
+  letter-spacing:0;
+  color:var(--ink);
+}
+.legal-body h3{
+  margin:2em 0 .6em;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.1rem;
+  letter-spacing:.03em;
+  color:var(--ink);
+}
+.legal-body h3:first-child{margin-top:.6em}
+.legal-body p{margin:0 0 .8em}
+.legal-body dl{display:grid;grid-template-columns:9.5em 1fr;gap:.25em 1.2em;margin:0}
+.legal-body dt{
+  font-family:var(--sans);
+  font-weight:500;
+  font-size:.8rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--sepia);
+  padding-top:.2em;
+}
+.legal-body dd{margin:0}
+.legal-body a{text-underline-offset:3px;overflow-wrap:anywhere}
+.legal-body .maj{margin-top:2em;font-style:italic;color:var(--ink-2)}
 
 /* ---------- Barre d'appel mobile ---------- */
 .callbar{display:none}
@@ -329,11 +383,6 @@ a{color:inherit}
 @media (max-width:860px){
   .services{grid-template-columns:repeat(2,1fr);row-gap:30px}
   .services > li:nth-child(3)::before{display:none}
-  .find{grid-template-columns:1fr}
-  .find address{text-align:center}
-  .n7{justify-content:center}
-  .contact li{justify-content:center}
-  .contact .k{width:auto}
 }
 @media (max-width:560px){
   body{font-size:1rem}
@@ -349,9 +398,10 @@ a{color:inherit}
   .services{grid-template-columns:1fr;row-gap:26px}
   .services > li::before{display:none}
   .services > li + li{padding-top:26px;border-top:1px solid rgba(140,117,99,.45)}
-  .map{min-height:260px}
   .actions .call{display:none}
   .contact li{flex-direction:column;align-items:center;gap:0}
+  .legal-body dl{grid-template-columns:1fr;gap:0}
+  .legal-body dd{margin-bottom:.6em}
   .callbar{
     display:flex;align-items:center;justify-content:center;gap:.6em;
     position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));
@@ -520,29 +570,88 @@ a{color:inherit}
     <h2 id="t-trouver">Nous trouver</h2>
     <svg class="flourish" viewBox="0 0 240 40" aria-hidden="true"><use href="#flourish"/></svg>
 
-    <div class="find">
-      <address>
-        <p class="addr">50 avenue Jean Jaurès<br>26600 Tain-l'Hermitage</p>
-        <p class="n7"><span class="route" aria-hidden="true">N 7</span>Sur la nationale 7</p>
-        <ul class="contact">
-          <li><span class="k">Téléphone</span><a class="tel" href="tel:+33772003670">07 72 00 36 70</a></li>
-          <li><span class="k">E-mail</span><a href="mailto:cordonnerietainlhermitage@gmail.com">cordonnerietainlhermitage@gmail.com</a></li>
-        </ul>
-        <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=50%20avenue%20Jean%20Jaur%C3%A8s%2C%2026600%20Tain-l%27Hermitage" target="_blank" rel="noopener">Itinéraire</a>
-      </address>
-      <div class="map">
-        <iframe title="Plan : 50 avenue Jean Jaurès, Tain-l'Hermitage" src="https://maps.google.com/maps?q=50%20avenue%20Jean%20Jaur%C3%A8s%2C%2026600%20Tain-l%27Hermitage&amp;z=16&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
+    <address class="card">
+      <svg class="corner tl" viewBox="0 0 120 120" aria-hidden="true"><use href="#corner"/></svg>
+      <svg class="corner tr" viewBox="0 0 120 120" aria-hidden="true"><use href="#corner"/></svg>
+      <svg class="corner bl" viewBox="0 0 120 120" aria-hidden="true"><use href="#corner"/></svg>
+      <svg class="corner br" viewBox="0 0 120 120" aria-hidden="true"><use href="#corner"/></svg>
+
+      <p class="addr">50 avenue Jean Jaurès<br>26600 Tain-l'Hermitage</p>
+      <p class="n7"><span class="route" aria-hidden="true">N 7</span>Sur la nationale 7</p>
+      <svg class="flourish" viewBox="0 0 240 40" aria-hidden="true"><use href="#flourish"/></svg>
+      <ul class="contact">
+        <li><span class="k">Téléphone</span><a class="tel" href="tel:+33772003670">07 72 00 36 70</a></li>
+        <li><span class="k">E-mail</span><a href="mailto:cordonnerietainlhermitage@gmail.com">cordonnerietainlhermitage@gmail.com</a></li>
+      </ul>
+      <a class="btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=50%20avenue%20Jean%20Jaur%C3%A8s%2C%2026600%20Tain-l%27Hermitage" target="_blank" rel="noopener noreferrer">Itinéraire</a>
+    </address>
   </section>
 
   <footer class="foot">
     <svg class="flourish" viewBox="0 0 240 40" aria-hidden="true"><use href="#flourish"/></svg>
     <p>Aurel Multiservices – artisan cordonnier, serrurier, dépanneur à Tain-l'Hermitage</p>
+
+    <details class="legal" id="mentions-legales">
+      <summary>Mentions légales et confidentialité</summary>
+      <div class="legal-body">
+
+        <h3>Éditeur du site</h3>
+        <dl>
+          <dt>Société</dt><dd>AUREL MULTISERVICES, EURL au capital de 8&nbsp;000&nbsp;€</dd>
+          <dt>Siège social</dt><dd>50 avenue Jean Jaurès, 26600 Tain-l'Hermitage</dd>
+          <dt>Immatriculation</dt><dd>RCS Romans 851&nbsp;144&nbsp;626 – inscrite au Registre national des entreprises</dd>
+          <dt>SIRET</dt><dd>851&nbsp;144&nbsp;626&nbsp;00021</dd>
+          <dt>TVA intracom.</dt><dd>FR70851144626</dd>
+          <dt>Code APE</dt><dd>95.23Z – Réparation de chaussures et d'articles en cuir</dd>
+          <dt>Téléphone</dt><dd><a href="tel:+33772003670">07 72 00 36 70</a></dd>
+          <dt>E-mail</dt><dd><a href="mailto:cordonnerietainlhermitage@gmail.com">cordonnerietainlhermitage@gmail.com</a></dd>
+          <dt>Publication</dt><dd>Directeur de la publication&nbsp;: Aurélien Laniece, gérant</dd>
+        </dl>
+
+        <h3>Hébergement</h3>
+        <dl>
+          <dt>Hébergeur</dt><dd>GitHub, Inc. (service GitHub Pages)</dd>
+          <dt>Adresse</dt><dd>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</dd>
+          <dt>Téléphone</dt><dd>+1 415 857 5430</dd>
+          <dt>Site</dt><dd><a href="https://github.com" rel="noopener noreferrer">github.com</a></dd>
+        </dl>
+
+        <!--
+          MÉDIATION DE LA CONSOMMATION (obligatoire pour un professionnel qui vend à des particuliers,
+          art. L.612-1 et L.616-1 du Code de la consommation).
+          Une fois l'adhésion à un médiateur faite (souvent proposée par la Chambre de métiers ou un syndicat
+          professionnel), remplacez les crochets ci-dessous puis retirez les balises de commentaire.
+
+        <h3>Médiation de la consommation</h3>
+        <p>Conformément aux articles L.612-1 et suivants du Code de la consommation, en cas de litige que nous n'aurions pu régler ensemble, vous pouvez recourir gratuitement au médiateur de la consommation dont nous relevons&nbsp;: [NOM DU MÉDIATEUR], [ADRESSE POSTALE], [SITE INTERNET DU MÉDIATEUR].</p>
+        -->
+
+        <h3>Propriété intellectuelle</h3>
+        <p>Les textes, la mise en page et les illustrations présents sur ce site sont la propriété d'Aurel Multiservices. Toute reproduction ou réutilisation, totale ou partielle, sans autorisation écrite préalable est interdite.</p>
+        <p>Polices de caractères&nbsp;: Rye et Oswald, distribuées sous licence SIL Open Font License&nbsp;1.1 et hébergées avec le site.</p>
+
+        <h3>Données personnelles et cookies</h3>
+        <p>Ce site ne dépose aucun cookie, n'utilise aucun outil de mesure d'audience et n'intègre aucun service tiers (carte, vidéo, réseau social, police en ligne). Il ne comporte aucun formulaire&nbsp;: l'éditeur ne collecte aucune donnée personnelle par son intermédiaire.</p>
+        <p>Comme tout hébergeur, GitHub enregistre l'adresse IP des visiteurs à des fins de sécurité. Ce traitement relève de GitHub&nbsp;: voir sa <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener noreferrer">déclaration de confidentialité</a>.</p>
+        <p>Le bouton «&nbsp;Itinéraire&nbsp;» ouvre Google Maps dans un nouvel onglet&nbsp;: vous quittez alors ce site et les conditions de Google s'appliquent.</p>
+        <p>Si vous nous contactez par téléphone ou par e-mail, vos coordonnées servent uniquement à répondre à votre demande et ne sont jamais transmises à des tiers. Conformément au RGPD et à la loi Informatique et Libertés, vous pouvez accéder à vos données, les faire rectifier ou effacer en écrivant à <a href="mailto:cordonnerietainlhermitage@gmail.com">cordonnerietainlhermitage@gmail.com</a>. Vous pouvez aussi adresser une réclamation à la <a href="https://www.cnil.fr" rel="noopener noreferrer">CNIL</a>.</p>
+
+        <p class="maj">Mentions mises à jour le 8 octobre 2026.</p>
+      </div>
+    </details>
   </footer>
 </main>
 
 <a class="callbar" href="tel:+33772003670"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler 07 72 00 36 70</a>
+
+<script>
+  // Ouvre les mentions légales quand on arrive via le lien …/#mentions-legales
+  (function(){
+    var d=document.getElementById('mentions-legales');
+    function check(){ if(location.hash==='#mentions-legales'){ d.open=true; d.scrollIntoView(); } }
+    window.addEventListener('hashchange',check); check();
+  })();
+</script>
 
 </body>
 </html>
